@@ -1,6 +1,10 @@
 import yaml 
 from fpdf import FPDF
-# Function to load job titles from YAML
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.enums import TA_JUSTIFY
+
 
 
 
@@ -21,9 +25,34 @@ def load_templates():
 
 
 
+# def generate_pdf(content: str, filename: str):
+#     pdf = FPDF()
+#     pdf.add_page()
+#     pdf.set_font("Arial", size=12)
+#     pdf.multi_cell(0, 8, content)
+#     pdf.output(filename)
+
+
+
 def generate_pdf(content: str, filename: str):
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    pdf.multi_cell(0, 8, content)
-    pdf.output(filename)
+    # Define the PDF file
+    doc = SimpleDocTemplate(filename, pagesize=A4)
+    
+    # Define styles
+    styles = getSampleStyleSheet()
+    custom_style = ParagraphStyle(
+        'CustomStyle',
+        parent=styles['Normal'],
+        fontSize=12,
+        leading=18,  # Line spacing
+        spaceAfter=12,  # Space between paragraphs
+        alignment=TA_JUSTIFY  # Justify text
+    )
+    
+    # Create a paragraph with formatting
+    formatted_content = Paragraph(content.replace("\n", "<br/>"), custom_style)
+
+    # Build the PDF
+    doc.build([formatted_content])
+
+    return filename
