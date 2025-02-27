@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Letter Generator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Cover Letter Generator</h2>
+        <!-- Collapsible Guide Section -->
+        <button class="btn btn-info mb-3 guide-btn" type="button" data-bs-toggle="collapse" data-bs-target="#guide">📖 User Guide</button>
+        <div id="guide" class="collapse">
+            <div class="card card-body">
+                <h5>A cover letter is a short, personalized document that helps you introduce yourself to employers. 
+                    🎯 It highlights your skills, education, and enthusiasm for the job or internship. 💼✨ </h5>
+                <h5>Think of it as your chance to stand out and make a great first impression! 🚀 </h5>
+                <h5>📌 How to Use:</h5>
+                <ul>
+                    <li>📝 Enter your <b>Name</b>.</li>
+                    <li>💼 Start typing a <b>Job Title</b>. If a suggestion appears, select it. Otherwise, type your own and proceed further.</li>
+                    <li>🏢 Start typing a <b>Company</b> name. If a suggestion appears, select it. Otherwise, type your own and proceed further.</li>
+                    <li>🛠️ Add up to <b>5 Skills</b> by typing and pressing Enter/Space.</li>
+                    <li>🎨 Select a <b>Template</b> from the dropdown.</li>
+                    <li>🚀 Click <b>Generate Cover Letter</b> and wait for the download link.</li>
+                </ul>
+                <p class="text-muted">⚡ Ensure all fields are filled for a better response.</p>
+                
+            </div>
+        </div>
+        <form id="coverLetterForm" class="mt-4">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+
+            <!-- Job Title Search -->
+            <div class="mb-3 position-relative">
+                <label class="form-label fw-bold">Job Title <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="job_title" placeholder="Start typing... eg: Product Engineer, Software Engineer ..." required>
+                <div id="job_suggestions" class="suggestions"></div>
+            </div>
+
+            <!-- Company Search -->
+            <div class="mb-3 position-relative">
+                <label class="form-label fw-bold">Company <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="company" placeholder="Start typing... eg: Amazon, Google ..." required>
+                <div id="company_suggestions" class="suggestions"></div>
+            </div>
+
+            <!-- Skills Multi-Tag Input -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Skills (Max 5)</label>
+                <div class="tag-container" id="tagContainer">
+                    <input type="text" class="tag-input" id="skillInput" placeholder="Type and press Enter/Space... eg: Python, PowerBI, SQL ...">
+                </div>
+            </div>
+            <!-- Theme Toggle Button Below Live User Count -->
+            <div class="theme-toggle-container">
+                <button id="themeToggle" class="btn btn-outline-secondary">
+                    <i class="bi bi-moon"></i> Dark Mode
+                </button>
+            </div>
+        
+        
+            <!-- Add Template Preview and Edit Functionality -->
+            <div class="mt-3">
+                <button type="button" class="btn btn-secondary" id="previewBtn">👀 Preview Template</button>
+                <button type="button" class="btn btn-warning" id="editToggleBtn" disabled>✏️ Enable Editing</button>
+            </div>
+            
+            <!-- Preview Container -->
+            <div id="templatePreview" class="mt-3 p-3 border rounded" style="display:none; background: #f8f9fa; min-height: 100px;">
+                <h5 class="fw-bold">Template Preview:</h5>
+                <p id="previewContent">Select a template and click preview to see its content.</p>
+            </div>
+            
+            <!-- Editable Content Area -->
+            <textarea id="editContent" class="form-control mt-2" rows="5" style="display:none;"></textarea>
+
+            <div class="mt-3 text-center" id="loader" style="display:none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Template <span class="text-danger">*</span></label>
+                <select class="form-control" id="template" required></select>
+            </div>
+            <button type="submit" class="btn btn-custom" id="generateBtn">⚡ Generate Cover Letter</button>
+
+        </form>
+
+
+        
+
+        <div class="mt-3" id="downloadLink" style="display:none;">
+            <a id="pdfLink" class="btn btn-custom" download>⬇️ Download Cover Letter</a>
+        </div>
+    </div>
+
+    <!-- Live User Count Display (Top Right, Broader Background) -->
+    <div class="position-fixed top-0 end-0 m-3 px-4 py-2 bg-white shadow-lg rounded-pill d-flex align-items-center"
+        data-bs-toggle="tooltip" data-bs-placement="left" title="Live Users Online">
+        <i class="bi bi-eye text-primary fs-4"></i>
+        <span id="user-count" class="ms-3 fw-bold text-dark fs-5">0</span>
+    </div>
+
+    <footer class="footer">
+        &copy; 2025 Cover Letter Generator | All rights reserved.<br>
+        ❤️ Bringing Ideas To Life – Saad Ghojaria & Hamza Ghojaria
+    </footer>
+
+    <script src="Script.js"></script>
+
+
+</body>
+</html>
