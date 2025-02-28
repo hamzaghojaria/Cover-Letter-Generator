@@ -272,6 +272,19 @@ async def capture_email(data: EmailCapture):
 
 
 
+@app.get("/download_companies/")
+def download_companies():
+    file_name="companies.xlsx"
+    file_path = os.path.join(BASE_DIR, "Services", file_name)
+
+    if not os.path.exists(file_path):
+        return {"error": "File not found. Please upload the correct file."}
+
+    return FileResponse(path=file_path, filename="companies.xlsx", media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+
+
+
+
 ####################################################### Main Work - End ###########################################################
 
 if __name__ == "__main__":
