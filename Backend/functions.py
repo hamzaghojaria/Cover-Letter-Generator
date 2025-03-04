@@ -4,6 +4,8 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.enums import TA_JUSTIFY
+from datetime import datetime
+
 
 ####################################################### Main Work - Start ###########################################################
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -65,49 +67,53 @@ def load_templates():
     except Exception as e:
         return { "An Error has occurred in load_templates ": str(e)}
 
-def save_email_to_yaml(email,yaml_path):
+def save_email_to_yaml(email, yaml_path):
     try:
-        """Save email to a YAML file."""
-        data = []
-        
-        # If file exists, load existing emails
+        """Save email to a YAML file grouped by date."""
+        data = {}
+        # Get today's date as a string
+        today = datetime.today().strftime("%Y-%m-%d")
+        # If file exists, load existing data
         if os.path.exists(yaml_path):
             with open(yaml_path, "r") as f:
                 try:
-                    data = yaml.safe_load(f) or []
+                    data = yaml.safe_load(f) or {}
                 except yaml.YAMLError:
-                    data = []  # If YAML is corrupted, reset it
-
-        # Append new email
-        data.append({"email": email})
-
+                    data = {}  # If YAML is corrupted, reset it
+        # Ensure today's date exists in the data
+        if today not in data:
+            data[today] = []
+        # Append the new email under today's date
+        data[today].append(email)
         # Write back to YAML file
         with open(yaml_path, "w") as f:
             yaml.safe_dump(data, f, default_flow_style=False)
     except Exception as e:
-        return { "An Error has occurred in save_email_to_yaml ": str(e)}
+        return {"An Error has occurred in save_email_to_yaml": str(e)}
 
 
-def save_feedback_to_yaml(feedback,email,yaml_path):
+def save_feedback_to_yaml(feedback, email, yaml_path):
     try:    
-        """Save feedback to a YAML file."""
-        data = []
-        
-        # If file exists, load existing emails
+        """Save feedback to a YAML file grouped by date."""
+        data = {}
+        # Get today's date as a string
+        today = datetime.today().strftime("%Y-%m-%d")
+        # If file exists, load existing data
         if os.path.exists(yaml_path):
             with open(yaml_path, "r") as f:
                 try:
-                    data = yaml.safe_load(f) or []
+                    data = yaml.safe_load(f) or {}
                 except yaml.YAMLError:
-                    data = []  # If YAML is corrupted, reset it
-
-        # Append new email
-        data.append({"feedback": feedback,"email": email})
-
+                    data = {}  # If YAML is corrupted, reset it
+        # Ensure today's date exists in the data
+        if today not in data:
+            data[today] = []
+        # Append new feedback under today's date
+        data[today].append({"feedback": feedback, "email": email})
         # Write back to YAML file
         with open(yaml_path, "w") as f:
             yaml.safe_dump(data, f, default_flow_style=False)
     except Exception as e:
-            return { "An Error has occurred in save_feedback_to_yaml ": str(e)}
+        return {"An Error has occurred in save_feedback_to_yaml": str(e)}
 
 ####################################################### Main Work - End ###########################################################
