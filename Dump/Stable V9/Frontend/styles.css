@@ -1,0 +1,168 @@
+body {
+    padding-bottom: 120px; /* Adjust based on footer height */
+}
+#templatePreview {
+    background: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    border: 1px solid var(--bs-border-color);
+    padding: 15px;
+    border-radius: 8px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+
+.suggestions {
+    position: absolute;
+    background: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color);
+    max-height: 150px;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 1000;
+    color: var(--bs-body-color);
+}
+.suggestion-item:hover {
+    background: var(--bs-secondary-bg);
+}
+.suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+}
+.tag-container {
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 40px;
+    align-items: center;
+}
+.tag {
+    background: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 2px;
+    display: flex;
+    align-items: center;
+}
+.tag .remove {
+    margin-left: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.tag-input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 5px;
+
+}
+.btn-custom {
+    background: linear-gradient(135deg, #17a2b8, #007bff);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+.btn-custom:hover {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.guide-btn {
+background: linear-gradient(135deg, #17a2b8, #007bff);
+border: none;
+color: white;
+padding: 10px 20px;
+font-size: 16px;
+font-weight: bold;
+border-radius: 8px;
+transition: all 0.3s ease-in-out;
+}
+
+.guide-btn:hover {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.footer {
+    background: #007bff;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.theme-toggle-container {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    z-index: 1050;
+}
+
+
+.feedback-container {
+    position: fixed;
+    top: 140px;
+    right: 20px;
+    z-index: 1050;
+}
+
+#feedbackToggle {
+    background: linear-gradient(135deg, #17a2b8, #007bff);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#feedbackToggle:hover {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+}
+
+.feedback-form {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 250px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.download-container {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.download-container p {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.download-container .btn-success {
+    background: linear-gradient(135deg, #28a745, #218838);
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.download-container .btn-success:hover {
+    background: linear-gradient(135deg, #218838, #1e7e34);
+}
