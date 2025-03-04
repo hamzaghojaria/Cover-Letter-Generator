@@ -31,7 +31,7 @@ skillInput.addEventListener("keypress", function (event) {
 
 // Ensure input remains active
 skillInput.addEventListener("focus", function () {
-    this.setAttribute("placeholder", "Type and press Enter/Space or select from the bottom list... eg: Python, PowerBI, SQL ...");
+    this.setAttribute("placeholder", "Type and press Enter/Space or select from the suggestions... eg: Python, PowerBI, SQL ...");
 });
 
 // Add a skill to the list
@@ -294,10 +294,10 @@ document.getElementById("template").addEventListener("change", function () {
     const emailInput = document.getElementById("userEmail");
 
     if (mandatoryEmailTemplates.includes(selectedTemplate)) {
-        templateNote.innerHTML = "⚠️ This template requires an email ID.";
+        templateNote.innerHTML = "⚠️ Email ID required! We promise no spam… just pure awesomeness! 😎💌";
         templateNote.style.color = "red";
     } else {
-        templateNote.innerHTML = "📩 Some templates (e.g., Startup, Execuitve, Technical) require an email ID.";
+        templateNote.innerHTML = "✨ Premium templates Eg. Startup, Technical, and Executive need a little something in return—your Email ID. Just a small price for big style! 😉";
         templateNote.style.color = "gray";
 
         // Clear email input when switching to a non-premium template

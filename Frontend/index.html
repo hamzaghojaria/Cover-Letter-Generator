@@ -25,9 +25,9 @@
                 <h5>📌 How to Use:</h5>
                 <ul>
                     <li>📝 Enter your <b>Name</b>.</li>
-                    <li>💼 Start typing a <b>Job Title</b>. If a suggestion appears, select it. Otherwise, type your own and proceed further.</li>
-                    <li>🏢 Start typing a <b>Company</b> name. If a suggestion appears, select it. Otherwise, type your own and proceed further.</li>
-                    <li>🛠️ Add up to <b>5 Skills</b> by typing and pressing Enter/Space.</li>
+                    <li>💼 Start typing a <b>Job Title</b>. If a suggestion appears, select it. Otherwise, type your own Job Title and proceed further.</li>
+                    <li>🏢 Start typing a <b>Company</b> name. If a suggestion appears, select it. Otherwise, type your own Company Name and proceed further.</li>
+                    <li>🛠️ Add up to <b>5 Skills</b> by typing and pressing Enter/Space or select from the suggestions.</li>
                     <li>🎨 Select a <b>Template</b> from the dropdown.</li>
                     <li>🚀 Click <b>Generate Cover Letter</b> and wait for the download link.</li>
                 </ul>
@@ -61,11 +61,14 @@
             <div class="mb-3">
                 <label class="form-label fw-bold">Skills (Max 5)</label>
                 <div class="tag-container" id="tagContainer">
-                    <input type="text" class="tag-input" id="skillInput" placeholder="Type and press Enter/Space or select from the bottom list... eg: Python, PowerBI, SQL ...">
+                    <input type="text" class="tag-input" id="skillInput" placeholder="Type and press Enter/Space or select from the suggestions... eg: Python, PowerBI, SQL ...">
                 </div>
             </div>
             <!-- Scrollable Skills List -->
             <div class="skills-list-container">
+                <small id="skillsNote" class="text-muted fst-italic">  
+                    A little nudge in the right direction—here are some skill suggestions! 🚀  
+                </small>
                 <div id="skillsList" class="skills-list"></div>
             </div>
 
@@ -146,7 +149,7 @@
 
     <!-- Modal for Displaying Company List -->
     <div class="download-container">
-        <p class="text-muted">📂 This file contains a list of 300+ companies with their Career Page & LinkedIn Jobs Page.</p>
+        <p class="text-muted">📁 This file contains a handpicked list of 300+ companies 📌 with direct links to their Career Pages 🌐 and LinkedIn Job Listings 🔗— your job search essential 🚀.</p>
         <a href="http://127.0.0.1:8000/download_companies/" class="btn btn-success" download>
             ⬇️ Download Company List
         </a>
