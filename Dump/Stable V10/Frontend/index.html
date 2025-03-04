@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Letter Generator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="favicon.webp">
+
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center"> 📝 CoverZen - Cover Letter Generator 🚀</h2>
+        <!-- Collapsible Guide Section -->
+        <button class="btn btn-info mb-3 guide-btn" type="button" data-bs-toggle="collapse" data-bs-target="#guide">📖 User Guide</button>
+        <div id="guide" class="collapse">
+            <div class="card card-body">
+                <h5>A cover letter is a short, personalized document that helps you introduce yourself to employers. 
+                    🎯 It highlights your skills, education, and enthusiasm for the job or internship. 💼✨ </h5>
+                <h5>Think of it as your chance to stand out and make a great first impression! 🚀 </h5>
+                <h5>📌 How to Use:</h5>
+                <ul>
+                    <li>📝 Enter your <b>Name</b>.</li>
+                    <li>💼 Start typing a <b>Job Title</b>. If a suggestion appears, select it. Otherwise, type your own Job Title and proceed further.</li>
+                    <li>🏢 Start typing a <b>Company</b> name. If a suggestion appears, select it. Otherwise, type your own Company Name and proceed further.</li>
+                    <li>🛠️ Add up to <b>5 Skills</b> by typing and pressing Enter/Space or select from the suggestions.</li>
+                    <li>🎨 Select a <b>Template</b> from the dropdown.</li>
+                    <li>🚀 Click <b>Generate Cover Letter</b> and wait for the download link.</li>
+                </ul>
+                <p class="text-muted">⚡ Ensure all fields are filled for a better response.</p>
+                
+            </div>
+        </div>
+
+
+        <form id="coverLetterForm" class="mt-4">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+
+            <!-- Job Title Search -->
+            <div class="mb-3 position-relative">
+                <label class="form-label fw-bold">Job Title <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="job_title" placeholder="Start typing... eg: Product Engineer, Software Engineer ..." required>
+                <div id="job_suggestions" class="suggestions"></div>
+            </div>
+
+            <!-- Company Search -->
+            <div class="mb-3 position-relative">
+                <label class="form-label fw-bold">Company <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="company" placeholder="Start typing... eg: Amazon, Google ..." required>
+                <div id="company_suggestions" class="suggestions"></div>
+            </div>
+
+            <!-- Skills Multi-Tag Input -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Skills (Max 5)</label>
+                <div class="tag-container" id="tagContainer">
+                    <input type="text" class="tag-input" id="skillInput" placeholder="Type and press Enter/Space or select from the suggestions... eg: Python, PowerBI, SQL ...">
+                </div>
+            </div>
+            <!-- Scrollable Skills List -->
+            <div class="skills-list-container">
+                <small id="skillsNote" class="text-muted fst-italic">  
+                    A little nudge in the right direction—here are some skill suggestions! 🚀  
+                </small>
+                <div id="skillsList" class="skills-list"></div>
+            </div>
+
+            <!-- Theme Toggle Button Below Live User Count -->
+            <div class="theme-toggle-container">
+                <button id="themeToggle" class="btn btn-outline-secondary">
+                    <i class="bi bi-moon"></i> Dark Mode
+                </button>
+            </div>
+        
+        
+            
+            
+            <!-- Editable Content Area -->
+            <textarea id="editContent" class="form-control mt-2" rows="5" style="display:none;"></textarea>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Template <span class="text-danger">*</span></label>
+                <select class="form-control" id="template" required></select>
+                <small id="templateNote" class="text-muted">
+                    ✨ Premium templates Eg. Startup, Technical, and Executive need a little something in return—your Email ID. Just a small price for big style! 😉
+                </small>
+            </div>
+            <!-- Add Template Preview and Edit Functionality -->
+            <div class="mt-3">
+                <button type="button" class="btn btn-secondary" id="previewBtn" style="margin-bottom: 10px;">👀 Preview Template</button>
+
+                <!-- <button type="button" class="btn btn-warning" id="editToggleBtn" disabled>✏️ Enable Editing</button> -->
+            </div>
+            
+            <!-- Preview Container -->
+            <div id="templatePreview" class="mt-3 p-3 border rounded" style="display:none; background: #f8f9fa; min-height: 100px;margin-bottom: 10px;">
+                <h5 class="fw-bold">Sample Template Preview:</h5>
+                <p id="previewContent">Select a template and click preview to see its content.</p>
+            </div>
+            <button type="submit" class="btn btn-custom" id="generateBtn">⚡ Generate Cover Letter</button>
+
+        </form>
+
+        <div class="mt-3 text-center" id="loader" style="display:none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <!-- Add this modal inside <body> in index.html -->
+        <div class="modal fade" id="emailCaptureModal" tabindex="-1" aria-labelledby="emailCaptureLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="emailCaptureLabel">📩 Get Your Cover Letter</h5>
+                <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                <p>📩 Drop your email, and we’ll slide into your inbox—but only with the good stuff! 🚀</p>
+                <input type="email" id="userEmail" class="form-control" placeholder="Your Email (Optional)">
+                </div>
+                <div class="modal-footer">
+                <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Skip</button>-->
+                <button type="button" class="btn btn-primary" id="confirmEmailBtn">Continue</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        
+
+        <div class="mt-3" id="downloadLink" style="display:none;">
+            <a id="pdfLink" class="btn btn-custom" download>⬇️ Download Cover Letter</a>
+        </div>
+    </div>
+
+    <!-- Live User Count Display (Top Right, Broader Background) -->
+    <div class="position-fixed top-0 end-0 m-3 px-4 py-2 bg-white shadow-lg rounded-pill d-flex align-items-center"
+        data-bs-toggle="tooltip" data-bs-placement="left" title="Live Users Online">
+        <i class="bi bi-eye text-primary fs-4"></i>
+        <span id="user-count" class="ms-3 fw-bold text-dark fs-5">0</span>
+    </div>
+
+    <!-- Modal for Displaying Company List -->
+    <div class="download-container">
+        <p class="text-muted">📁 This file contains a handpicked list of 300+ companies 📌 with direct links to their Career Pages 🌐 and LinkedIn Job Listings 🔗— your job search essential 🚀.</p>
+        <a href="http://127.0.0.1:8000/download_companies/" class="btn btn-success" download>
+            ⬇️ Download Company List
+        </a>
+    </div>
+
+
+
+        <!-- Floating Feedback Button -->
+    <div class="feedback-container">
+        <button id="feedbackToggle" class="btn btn-outline-secondary">💬 Feedback</button>
+        <div id="feedbackFormContainer" class="feedback-form">
+            <form id="feedbackForm">
+                <label class="form-label fw-bold">Your Feedback</label>
+                <textarea class="form-control" id="feedbackText" rows="3" required></textarea>
+                <label class="form-label mt-2">Email (optional)</label>
+                <input type="email" class="form-control" id="feedbackEmail" placeholder="Your email">
+                <h9>📩 <em>Share Your Email ID & Get a Response on Your Feedback!</em> 💬</h9>  
+                <!--<p><em>We truly value your thoughts! Please enter your email so we can get back to you with a response. 😊</em></p> -->
+                <button type="submit" class="btn btn-custom mt-2 w-100">Submit</button>
+                <p id="feedbackMessage" class="mt-2 text-success text-center"></p>
+            </form>
+        </div>
+    </div>
+
+    
+    
+
+    <footer class="footer text-center p-3">
+        &copy; 2025 Cover Letter Generator | All rights reserved.<br>
+        ❤️ Bringing Ideas To Life –  
+        <a href="https://www.linkedin.com/in/saad-ghojaria/" class="footer-link bg-dark text-warning p-1 rounded" target="_blank" rel="noopener noreferrer">Saad Ghojaria</a> &  
+        <a href="https://www.linkedin.com/in/hamzaghojaria/" class="footer-link bg-warning text-dark p-1 rounded" target="_blank" rel="noopener noreferrer">Hamza Ghojaria</a>
+    </footer>
+    
+
+
+    <script src="Script.js"></script>
+
+
+</body>
+</html>
