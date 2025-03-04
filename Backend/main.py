@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Request
 from pydantic import BaseModel
-from fpdf import FPDF
 from fastapi.responses import FileResponse
 import uvicorn
 import os, requests
@@ -10,7 +9,6 @@ from fastapi.middleware.cors import CORSMiddleware
 import yaml 
 from fastapi import FastAPI
 from pydantic import BaseModel, EmailStr
-import json
 import functions as coverletter_proc
 
 app = FastAPI()
