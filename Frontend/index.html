@@ -61,9 +61,14 @@
             <div class="mb-3">
                 <label class="form-label fw-bold">Skills (Max 5)</label>
                 <div class="tag-container" id="tagContainer">
-                    <input type="text" class="tag-input" id="skillInput" placeholder="Type and press Enter/Space... eg: Python, PowerBI, SQL ...">
+                    <input type="text" class="tag-input" id="skillInput" placeholder="Type and press Enter/Space or select from the bottom list... eg: Python, PowerBI, SQL ...">
                 </div>
             </div>
+            <!-- Scrollable Skills List -->
+            <div class="skills-list-container">
+                <div id="skillsList" class="skills-list"></div>
+            </div>
+
             <!-- Theme Toggle Button Below Live User Count -->
             <div class="theme-toggle-container">
                 <button id="themeToggle" class="btn btn-outline-secondary">

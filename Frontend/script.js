@@ -1,3 +1,85 @@
+const predefinedSkills = ["Python","Java",".Net","JavaScript", "SQL", "Machine Learning", "Data Science", "Power BI", "Deep Learning","Generative AI", "TensorFlow", "React.js", "Node.js", "Vue.js"];
+const skillInput = document.getElementById("skillInput");
+
+function loadSkillsList() {
+    const skillsList = document.getElementById("skillsList");
+    skillsList.innerHTML = ""; // Clear existing items
+
+    predefinedSkills.forEach(skill => {
+        const skillDiv = document.createElement("div");
+        skillDiv.classList.add("skill-item");
+        skillDiv.textContent = skill;
+        skillDiv.onclick = function () {
+            addSkillTag(skill);
+            skillInput.focus(); // 🔥 Keep input field active after clicking
+        };
+        skillsList.appendChild(skillDiv);
+    });
+}
+
+// Allow typing and pressing Enter/Space to add skills
+skillInput.addEventListener("keypress", function (event) {
+    if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        const skill = this.value.trim();
+        if (skill) {
+            addSkillTag(skill);
+            this.value = ""; // Clear input after adding
+        }
+    }
+});
+
+// Ensure input remains active
+skillInput.addEventListener("focus", function () {
+    this.setAttribute("placeholder", "Type and press Enter/Space or select from the bottom list... eg: Python, PowerBI, SQL ...");
+});
+
+// Add a skill to the list
+function addSkillTag(skill) {
+    if (skill === "" || skills.includes(skill)) return;
+    if (skills.length >= 5) {
+        alert("You can only add up to 5 skills.");
+        return;
+    }
+    skills.push(skill);
+    updateSkillTags();
+}
+
+// Update the selected skill tags UI
+function updateSkillTags() {
+    const tagContainer = document.getElementById("tagContainer");
+    tagContainer.innerHTML = ""; // Clear only the tag elements
+
+    skills.forEach(skill => {
+        const tag = document.createElement("div");
+        tag.classList.add("tag");
+        tag.textContent = skill;
+
+        const removeButton = document.createElement("span");
+        removeButton.classList.add("remove");
+        removeButton.textContent = "×";
+        removeButton.onclick = function () {
+            skills = skills.filter(s => s !== skill);
+            updateSkillTags();
+            document.querySelectorAll(".skill-item").forEach(item => {
+                if (item.textContent === skill) {
+                    item.classList.remove("selected");
+                }
+            });
+        };
+
+        tag.appendChild(removeButton);
+        tagContainer.appendChild(tag);
+    });
+
+    skillInput.focus(); // Ensure typing works even after clicking a skill
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    loadSkillsList();
+});
+
+
 document.getElementById("feedbackToggle").addEventListener("click", function() {
     const form = document.getElementById("feedbackFormContainer");
     form.style.display = form.style.display === "block" ? "none" : "block";
@@ -189,6 +271,7 @@ async function loadTemplates() {
         // Add a star if the template requires an email
         if (mandatoryEmailTemplates.includes(template.toLowerCase())) {
             option.textContent = `${formattedTemplate} ✨`;
+            //option.style.fontWeight = "bold";
             option.setAttribute("data-bs-toggle", "tooltip");
             option.setAttribute("title", "⚠️ This template requires an email to proceed.");
         } else {
@@ -206,7 +289,7 @@ async function loadTemplates() {
 // Clear email when switching to a non-premium template
 document.getElementById("template").addEventListener("change", function () {
     const selectedTemplate = this.value.toLowerCase();
-    const mandatoryEmailTemplates = ["startup", "business", "corporate"];
+    const mandatoryEmailTemplates = ["startup", "executive", "technical"];
     const templateNote = document.getElementById("templateNote");
     const emailInput = document.getElementById("userEmail");
 
@@ -214,7 +297,7 @@ document.getElementById("template").addEventListener("change", function () {
         templateNote.innerHTML = "⚠️ This template requires an email ID.";
         templateNote.style.color = "red";
     } else {
-        templateNote.innerHTML = "📩 Some templates (e.g., Startup, Business, Corporate) require an email ID.";
+        templateNote.innerHTML = "📩 Some templates (e.g., Startup, Execuitve, Technical) require an email ID.";
         templateNote.style.color = "gray";
 
         // Clear email input when switching to a non-premium template
