@@ -401,6 +401,31 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
+
+function triggerCelebration() {
+    const confettiContainer = document.createElement("div");
+    confettiContainer.classList.add("confetti-container");
+    document.body.appendChild(confettiContainer);
+
+    for (let i = 0; i < 100; i++) { // Increased number of confetti
+        let confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.animationDuration = Math.random() * 4 + 2 + "s"; // Increased range for better effect
+        confetti.style.width = Math.random() * 10 + 5 + "px"; // Varying size
+        confetti.style.height = confetti.style.width;
+        confetti.style.opacity = Math.random(); // Random opacity
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confettiContainer.appendChild(confetti);
+    }
+
+    setTimeout(() => {
+        confettiContainer.remove();
+    }, 6000); // Confetti disappears after 6 seconds
+
+    alert("🎉 Congratulations! Your cover letter is ready for download! 🚀");
+}
+
 async function processCoverLetter(name, jobTitle, company, template) {
     const response = await fetch('http://127.0.0.1:8000/generate_cover_letter/', {
         method: 'POST',
@@ -422,6 +447,10 @@ async function processCoverLetter(name, jobTitle, company, template) {
         link.href = URL.createObjectURL(blob);
         link.download = `${name}_cover_letter.pdf`;
         document.getElementById('downloadLink').style.display = 'block';
+
+        // Trigger celebration when download is ready
+        triggerCelebration();
+
     } else {
         alert('Failed to generate cover letter');
     }
