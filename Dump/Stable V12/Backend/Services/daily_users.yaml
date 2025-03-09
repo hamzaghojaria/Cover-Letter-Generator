@@ -1,0 +1,18 @@
+'2025-03-04':
+  127.0.0.1:
+    city: Unknown
+    country: Unknown
+    network: Unknown
+    region: Unknown
+    user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+      like Gecko) Chrome/133.0.0.0 Safari/537.36
+    visits: 7
+'2025-03-09':
+  127.0.0.1:
+    city: Unknown
+    country: Unknown
+    network: Unknown
+    region: Unknown
+    user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+      like Gecko) Chrome/133.0.0.0 Safari/537.36
+    visits: 10
