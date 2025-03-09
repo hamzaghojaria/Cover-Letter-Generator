@@ -401,6 +401,16 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
+async function fetchTotalGenerated() {
+    try {
+        const response = await fetch("http://127.0.0.1:8000/total_generated/");
+        const data = await response.json();
+        document.getElementById("totalCoverLetters").textContent = `📄 Total Cover Letters Generated: ${data.total}`;
+    } catch (error) {
+        console.error("Error fetching total count:", error);
+    }
+}
+
 
 function triggerCelebration() {
     const confettiContainer = document.createElement("div");
@@ -450,6 +460,7 @@ async function processCoverLetter(name, jobTitle, company, template) {
 
         // Trigger celebration when download is ready
         triggerCelebration();
+        fetchTotalGenerated(); // 🔄 Update total count
 
     } else {
         alert('Failed to generate cover letter');
@@ -462,4 +473,5 @@ window.onload = async function() {
     loadTemplates();
     showSuggestions("job_title", "job_suggestions", jobTitles);
     showSuggestions("company", "company_suggestions", companies);
+    fetchTotalGenerated();  // Fetch and display total count
 };

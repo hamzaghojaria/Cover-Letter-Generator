@@ -258,3 +258,14 @@ transition: all 0.3s ease-in-out;
         opacity: 0;
     }
 }
+
+#totalCoverLetters {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 10px;
+}

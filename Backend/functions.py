@@ -115,5 +115,23 @@ def save_feedback_to_yaml(feedback, email, yaml_path):
             yaml.safe_dump(data, f, default_flow_style=False)
     except Exception as e:
         return {"An Error has occurred in save_feedback_to_yaml": str(e)}
+    
+
+# Load cover_letter_generated_count from YAML file
+def load_count():
+    file_name="cover_letter_generated_count.yaml.yaml"
+    yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+    if os.path.exists(yaml_path):
+        with open(yaml_path, "r") as f:
+            data = yaml.safe_load(f)
+            return data.get("count", 0)
+    return 0
+
+# Save cover_letter_generated_count to YAML file
+def save_count(count):
+    file_name="cover_letter_generated_count.yaml.yaml"
+    yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+    with open(yaml_path, "w") as f:
+        yaml.dump({"count": count}, f)
 
 ####################################################### Main Work - End ###########################################################

@@ -236,6 +236,24 @@ def get_daily_users():
 
 ############################ Daily Users - End  ###########################
 
+
+
+
+
+# API to get total cover letters generated
+@app.get("/total_generated/")
+def total_generated():
+    return {"total": coverletter_proc.load_count()}
+
+# # API to generate a cover letter (modify your existing function)
+# @app.post("/generate_cover_letter/")
+# def generate_cover_letter(data: dict):
+#     count = coverletter_proc.load_count() + 1  # Increment count
+#     coverletter_proc.save_count(count)
+#     return {"message": "Cover letter generated!", "total": count}
+
+
+
 ####################################################### Main Work - Start ###########################################################
 class CoverLetterInput(BaseModel):
     name: str
@@ -257,6 +275,8 @@ def generate_cover_letter(data: CoverLetterInput):
 
         filename = f"{data.name}_cover_letter.pdf"
         coverletter_proc.generate_pdf(cover_letter, filename)
+        count = coverletter_proc.load_count() + 1  # Increment count
+        coverletter_proc.save_count(count)
         return FileResponse(filename, media_type="application/pdf", filename=filename)
     except Exception as e:
         return { "An Error has occurred in generate_cover_letter ": str(e)}
