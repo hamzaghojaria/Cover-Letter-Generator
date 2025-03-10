@@ -19,7 +19,7 @@ function loadSkillsList() {
 
 // Allow typing and pressing Enter/Space to add skills
 skillInput.addEventListener("keypress", function (event) {
-    if (event.key === "Enter" || event.key === " ") {
+    if (event.key === "Enter" ) {
         event.preventDefault();
         const skill = this.value.trim();
         if (skill) {
