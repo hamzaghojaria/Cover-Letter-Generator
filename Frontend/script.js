@@ -31,7 +31,7 @@ skillInput.addEventListener("keypress", function (event) {
 
 // Ensure input remains active
 skillInput.addEventListener("focus", function () {
-    this.setAttribute("placeholder", "Type and press Enter/Space or select from the suggestions... eg: Python, PowerBI, SQL ...");
+    this.setAttribute("placeholder", "Type and press Enter or select from the suggestions... eg: Python, PowerBI, SQL ...");
 });
 
 // Add a skill to the list
