@@ -333,7 +333,7 @@ async def submit_feedback(data: FeedbackInput):
 
 
 
-@app.get("/download_companies/")
+@app.get("/download_companies/") #Api to download companies sheet 
 def download_companies():
     try:
         file_name="companies.xlsx"

@@ -337,7 +337,7 @@ function addSkillTag(skill) {
 }
 
 document.getElementById("skillInput").addEventListener("keypress", function(event) {
-    if (event.key === "Enter" || event.key === " ") {
+    if (event.key === "Enter") {
         event.preventDefault();
         addSkillTag(this.value);
     }
