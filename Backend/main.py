@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Request
 from pydantic import BaseModel
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse,HTMLResponse
 import uvicorn
 import os, requests
 from datetime import datetime
@@ -9,7 +9,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import yaml 
 from fastapi import FastAPI
 from pydantic import BaseModel, EmailStr
-import functions as coverletter_proc
+from Backend import functions as coverletter_proc
+#import functions as coverletter_proc
 
 app = FastAPI()
 
@@ -22,6 +23,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Serve static files from the "Frontend" directory
+app.mount("/static", StaticFiles(directory="Frontend"), name="static")
+
+@app.get("/", response_class=HTMLResponse)
+async def serve_frontend():
+    with open("Frontend/index.html", "r", encoding="utf-8") as f:
+        return f.read()
 
 ######################## Job Title Add & Delete - Start ###############################
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
