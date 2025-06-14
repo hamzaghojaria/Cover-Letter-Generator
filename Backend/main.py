@@ -1,13 +1,12 @@
 from fastapi import FastAPI
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Request
-from pydantic import BaseModel
 from fastapi.responses import FileResponse,HTMLResponse
 import uvicorn
 import os, requests
 from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
 import yaml 
-from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, EmailStr
 from Backend import functions as coverletter_proc
 #import functions as coverletter_proc
