@@ -1,4 +1,4 @@
-const predefinedSkills = ["Python","Java",".Net","JavaScript", "SQL", "Machine Learning", "Data Science", "Power BI", "Deep Learning","Generative AI", "TensorFlow", "React.js", "Node.js", "Vue.js"];
+const predefinedSkills = ["Python", "Java", ".Net", "JavaScript", "SQL", "Machine Learning", "Data Science", "Power BI", "Deep Learning", "Generative AI", "TensorFlow", "React.js", "Node.js", "Vue.js"];
 const skillInput = document.getElementById("skillInput");
 
 function loadSkillsList() {
@@ -9,7 +9,7 @@ function loadSkillsList() {
         const skillDiv = document.createElement("div");
         skillDiv.classList.add("skill-item");
         skillDiv.textContent = skill;
-        skillDiv.onclick = function () {
+        skillDiv.onclick = function() {
             addSkillTag(skill);
             skillInput.focus(); // 🔥 Keep input field active after clicking
         };
@@ -18,8 +18,8 @@ function loadSkillsList() {
 }
 
 // Allow typing and pressing Enter/Space to add skills
-skillInput.addEventListener("keypress", function (event) {
-    if (event.key === "Enter" ) {
+skillInput.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
         event.preventDefault();
         const skill = this.value.trim();
         if (skill) {
@@ -30,7 +30,7 @@ skillInput.addEventListener("keypress", function (event) {
 });
 
 // Ensure input remains active
-skillInput.addEventListener("focus", function () {
+skillInput.addEventListener("focus", function() {
     this.setAttribute("placeholder", "Type and press Enter or select from the suggestions... eg: Python, PowerBI, SQL ...");
 });
 
@@ -58,7 +58,7 @@ function updateSkillTags() {
         const removeButton = document.createElement("span");
         removeButton.classList.add("remove");
         removeButton.textContent = "×";
-        removeButton.onclick = function () {
+        removeButton.onclick = function() {
             skills = skills.filter(s => s !== skill);
             updateSkillTags();
             document.querySelectorAll(".skill-item").forEach(item => {
@@ -75,7 +75,7 @@ function updateSkillTags() {
     skillInput.focus(); // Ensure typing works even after clicking a skill
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     loadSkillsList();
 });
 
@@ -87,14 +87,19 @@ document.getElementById("feedbackToggle").addEventListener("click", function() {
 
 document.getElementById("feedbackForm").addEventListener("submit", async function(event) {
     event.preventDefault();
-    
+
     const email = document.getElementById("feedbackEmail").value;
     const feedback = document.getElementById("feedbackText").value;
 
     const response = await fetch("http://127.0.0.1:8000/submit_feedback/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ feedback,email})
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            feedback,
+            email
+        })
     });
 
     if (response.ok) {
@@ -122,7 +127,7 @@ document.getElementById("previewBtn").addEventListener("click", async function()
         const data = await response.json();
         document.getElementById("previewContent").innerHTML = data.preview;
         document.getElementById("templatePreview").style.display = "block";
-       // document.getElementById("editToggleBtn").disabled = false;
+        // document.getElementById("editToggleBtn").disabled = false;
     } else {
         alert("Failed to load template preview.");
     }
@@ -287,7 +292,7 @@ async function loadTemplates() {
 }
 
 // Clear email when switching to a non-premium template
-document.getElementById("template").addEventListener("change", function () {
+document.getElementById("template").addEventListener("change", function() {
     const selectedTemplate = this.value.toLowerCase();
     const mandatoryEmailTemplates = ["startup", "executive", "technical"];
     const templateNote = document.getElementById("templateNote");
@@ -386,8 +391,12 @@ document.getElementById('coverLetterForm').addEventListener('submit', async func
         if (isValidEmail(email)) {
             await fetch('http://127.0.0.1:8000/capture_email/', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email })
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email
+                })
             });
         }
 
@@ -439,7 +448,9 @@ function triggerCelebration() {
 async function processCoverLetter(name, jobTitle, company, template) {
     const response = await fetch('http://127.0.0.1:8000/generate_cover_letter/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
             name,
             job_title: jobTitle,
@@ -473,5 +484,5 @@ window.onload = async function() {
     loadTemplates();
     showSuggestions("job_title", "job_suggestions", jobTitles);
     showSuggestions("company", "company_suggestions", companies);
-    fetchTotalGenerated();  // Fetch and display total count
+    fetchTotalGenerated(); // Fetch and display total count
 };
