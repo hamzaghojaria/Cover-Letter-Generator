@@ -119,7 +119,7 @@ def save_feedback_to_yaml(feedback, email, yaml_path):
 
 # Load cover_letter_generated_count from YAML file
 def load_count():
-    file_name="cover_letter_generated_count.yaml.yaml"
+    file_name="cover_letter_generated_count.yaml"
     yaml_path = os.path.join(BASE_DIR, "Services", file_name)
     if os.path.exists(yaml_path):
         with open(yaml_path, "r") as f:
@@ -129,7 +129,7 @@ def load_count():
 
 # Save cover_letter_generated_count to YAML file
 def save_count(count):
-    file_name="cover_letter_generated_count.yaml.yaml"
+    file_name="cover_letter_generated_count.yaml"
     yaml_path = os.path.join(BASE_DIR, "Services", file_name)
     with open(yaml_path, "w") as f:
         yaml.dump({"count": count}, f)
