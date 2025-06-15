@@ -40,7 +40,7 @@ class JobTitleInput(BaseModel):
 def add_job_title(data: JobTitleInput):
     try:
         file_name="job_titles.yaml"
-        yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+        yaml_path = os.path.join(BASE_DIR, "Backend", "Services", file_name)
         job_titles = coverletter_proc.load_job_titles()
         if data.title in job_titles:
             return {"error": "Job title already exists"}
@@ -58,7 +58,7 @@ def delete_job_title(data: JobTitleInput):
     try:
         job_titles = coverletter_proc.load_job_titles()
         file_name="job_titles.yaml"
-        yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+        yaml_path = os.path.join(BASE_DIR, "Backend", "Services", file_name)
         if data.title not in job_titles:
             return {"error": "Job title not found"}
 
@@ -81,7 +81,7 @@ class CompaniesInput(BaseModel):
 def add_companies(data: CompaniesInput):
     try:
         file_name="companies.yaml"
-        yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+        yaml_path = os.path.join(BASE_DIR, "Backend", "Services", file_name)
         companies = coverletter_proc.load_companies()
         if data.title in companies:
             return {"error": "Companies already exists"}
@@ -100,7 +100,7 @@ def delete_companies(data: CompaniesInput):
     try:
         companies = coverletter_proc.load_companies()
         file_name="companies.yaml"
-        yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+        yaml_path = os.path.join(BASE_DIR, "Backend", "Services", file_name)
         if data.title not in companies:
             return {"error": "Job title not found"}
 
@@ -150,7 +150,7 @@ async def websocket_endpoint(websocket: WebSocket):
 def load_user_data():
     try:
         file_name="daily_users.yaml"
-        yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+        yaml_path = os.path.join(BASE_DIR, "Backend", "Services", file_name)
         if os.path.exists(yaml_path):
             with open(yaml_path, "r") as f:
                 return yaml.safe_load(f) or {}
@@ -163,7 +163,7 @@ def load_user_data():
 def save_user_data(user_data):
     try:
         file_name="daily_users.yaml"
-        yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+        yaml_path = os.path.join(BASE_DIR, "Backend", "Services", file_name)
         with open(yaml_path, "w") as f:
             yaml.safe_dump(user_data, f, default_flow_style=False)
     except Exception as e:
@@ -316,7 +316,7 @@ class EmailCapture(BaseModel):
 async def capture_email(data: EmailCapture):
     try:
         file_name="emails.yaml"
-        yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+        yaml_path = os.path.join(BASE_DIR, "Backend", "Services", file_name)
         coverletter_proc.save_email_to_yaml(data.email,yaml_path)
         return {"message": "Email captured successfully"}
     except Exception as e:
@@ -332,7 +332,7 @@ class FeedbackInput(BaseModel):
 async def submit_feedback(data: FeedbackInput):
     try:
         file_name="feedback.yaml"
-        yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+        yaml_path = os.path.join(BASE_DIR, "Backend", "Services", file_name)
         coverletter_proc.save_feedback_to_yaml( data.feedback,data.email,yaml_path)
         return {"message": "Feedback submitted successfully"}
     except Exception as e:
