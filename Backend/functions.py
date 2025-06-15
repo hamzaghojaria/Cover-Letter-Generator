@@ -39,7 +39,7 @@ def generate_pdf(content: str, filename: str):
 def load_job_titles():
     try:
         file_name="job_titles.yaml"
-        yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+        yaml_path = os.path.join(BASE_DIR, "Backend", "Services", file_name)
         with open(yaml_path, "r") as f:
             data = yaml.safe_load(f)
             #print("data",data)
@@ -50,7 +50,7 @@ def load_job_titles():
 def load_companies():
     try:
         file_name="companies.yaml"
-        yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+        yaml_path = os.path.join(BASE_DIR, "Backend", "Services", file_name)
         with open(yaml_path, "r") as f:
             data = yaml.safe_load(f)
         return data.get("companies", [])
@@ -60,7 +60,7 @@ def load_companies():
 def load_templates():
     try:
         file_name="templates.yaml"
-        yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+        yaml_path = os.path.join(BASE_DIR, "Backend", "Services", file_name)
         with open(yaml_path, "r",encoding="utf-8") as f:
             data = yaml.safe_load(f)
         return data.get("templates", {})
@@ -120,7 +120,7 @@ def save_feedback_to_yaml(feedback, email, yaml_path):
 # Load cover_letter_generated_count from YAML file
 def load_count():
     file_name="cover_letter_generated_count.yaml.yaml"
-    yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+    yaml_path = os.path.join(BASE_DIR, "Backend", "Services", file_name)
     if os.path.exists(yaml_path):
         with open(yaml_path, "r") as f:
             data = yaml.safe_load(f)
@@ -130,7 +130,7 @@ def load_count():
 # Save cover_letter_generated_count to YAML file
 def save_count(count):
     file_name="cover_letter_generated_count.yaml.yaml"
-    yaml_path = os.path.join(BASE_DIR, "Services", file_name)
+    yaml_path = os.path.join(BASE_DIR, "Backend", "Services", file_name)
     with open(yaml_path, "w") as f:
         yaml.dump({"count": count}, f)
 
