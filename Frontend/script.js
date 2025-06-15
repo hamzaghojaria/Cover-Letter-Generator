@@ -195,11 +195,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 const userCountElement = document.getElementById("user-count");
-const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
-const wsHost = window.location.host;
-const ws = new WebSocket(`${wsProtocol}://${wsHost}/ws/live_users`);
-
-#const ws = new WebSocket("ws://cover-letter-generator-phse.onrender.com/ws/live_users");
+const ws = new WebSocket("ws://127.0.0.1:8000/ws/live_users");
 
 ws.onmessage = function(event) {
     userCountElement.textContent = event.data.replace("Live Users: ", "");
