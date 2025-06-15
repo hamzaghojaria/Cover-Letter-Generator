@@ -91,7 +91,7 @@ document.getElementById("feedbackForm").addEventListener("submit", async functio
     const email = document.getElementById("feedbackEmail").value;
     const feedback = document.getElementById("feedbackText").value;
 
-    const response = await fetch("http://127.0.0.1:8000/submit_feedback/", {
+    const response = await fetch("/submit_feedback/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -122,7 +122,7 @@ document.getElementById("previewBtn").addEventListener("click", async function()
         return;
     }
 
-    const response = await fetch(`http://127.0.0.1:8000/template_preview/?template=${template}`);
+    const response = await fetch(`/template_preview/?template=${template}`);
     if (response.ok) {
         const data = await response.json();
         document.getElementById("previewContent").innerHTML = data.preview;
@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 async function logUserVisit() {
     try {
-        await fetch("http://127.0.0.1:8000/log_visit/");
+        await fetch("/log_visit/");
         console.log("User visit logged successfully.");
     } catch (error) {
         console.error("Error logging user visit:", error);
@@ -215,8 +215,8 @@ let companies = [];
 let skills = [];
 
 async function loadJobTitlesAndCompanies() {
-    const jobTitleResponse = await fetch("http://127.0.0.1:8000/job_titles/");
-    const companyResponse = await fetch("http://127.0.0.1:8000/companies/");
+    const jobTitleResponse = await fetch("/job_titles/");
+    const companyResponse = await fetch("/companies/");
 
     jobTitles = (await jobTitleResponse.json()).job_titles;
     companies = (await companyResponse.json()).companies;
@@ -256,7 +256,7 @@ function showSuggestions(inputId, suggestionsId, dataList) {
 }
 
 async function loadTemplates() {
-    const response = await fetch("http://127.0.0.1:8000/templates/");
+    const response = await fetch("/templates/");
     const data = await response.json();
     const templateSelect = document.getElementById("template");
 
@@ -389,7 +389,7 @@ document.getElementById('coverLetterForm').addEventListener('submit', async func
 
         // Save email only if entered
         if (isValidEmail(email)) {
-            await fetch('http://127.0.0.1:8000/capture_email/', {
+            await fetch('/capture_email/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -412,7 +412,7 @@ function isValidEmail(email) {
 
 async function fetchTotalGenerated() {
     try {
-        const response = await fetch("http://127.0.0.1:8000/total_generated/");
+        const response = await fetch("/total_generated/");
         const data = await response.json();
         document.getElementById("totalCoverLetters").textContent = `📄 Total Cover Letters Generated: ${data.total}`;
     } catch (error) {
@@ -446,7 +446,7 @@ function triggerCelebration() {
 }
 
 async function processCoverLetter(name, jobTitle, company, template) {
-    const response = await fetch('http://127.0.0.1:8000/generate_cover_letter/', {
+    const response = await fetch('/generate_cover_letter/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
