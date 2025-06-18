@@ -195,19 +195,42 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 const userCountElement = document.getElementById("user-count");
+const liveUserBlock = document.getElementById("liveUserBlock");
+
+// Always start with the block hidden
+liveUserBlock.style.display = "none";
+
 const ws = new WebSocket("ws://127.0.0.1:8000/ws/live_users");
 
 ws.onmessage = function(event) {
-    userCountElement.textContent = event.data.replace("Live Users: ", "");
+    const raw = event.data;
+    console.log("WebSocket message:", raw);
+
+    const match = raw.match(/Live Users:\s*(\d+)/);
+    if (match) {
+        const count = parseInt(match[1], 10);
+
+        if (count && count > 0) {
+            userCountElement.textContent = count;
+            liveUserBlock.style.display = "flex";
+        } else {
+            liveUserBlock.style.display = "none";
+        }
+    } else {
+        liveUserBlock.style.display = "none";
+    }
 };
 
 ws.onerror = function() {
-    userCountElement.textContent = "Error!";
+    console.error("WebSocket error");
+    liveUserBlock.style.display = "none";
 };
 
 ws.onclose = function() {
-    userCountElement.textContent = "Disconnected";
+    console.warn("WebSocket closed");
+    liveUserBlock.style.display = "none";
 };
+
 
 
 let jobTitles = [];
