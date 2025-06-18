@@ -294,3 +294,18 @@ body {
     display: inline-block;
     margin-top: 10px;
 }
+
+@media (max-width: 576px) {
+    #liveUserBlock {
+        top: 10px;
+        right: 10px;
+        transform: scale(0.8); /* Optional: Make it smaller on mobile */
+        z-index: 1051; /* Ensure it stays above but not blocking */
+    }
+
+    h2.text-center {
+        margin-top: 60px; /* Push title lower so they don’t overlap */
+    }
+}
+
+
